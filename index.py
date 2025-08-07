@@ -42,4 +42,5 @@ def search_number():
 
 # Bagian ini tidak diperlukan oleh Render karena Render akan menggunakan Gunicorn
 # if __name__ == '__main__':
+
 #     app.run(host='0.0.0.0', port=81)
