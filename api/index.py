@@ -5,10 +5,10 @@ import json
 import os # Kita bisa pakai os.environ lagi!
 
 # Ganti nama 'app' menjadi 'api' agar dikenali Vercel
-api = Flask(__name__)
-CORS(api)
+app = Flask(__name__)
+CORS(app)
 
-@api.route('/search', methods=['POST'])
+@app.route('/search', methods=['POST'])
 def search_number():
     # ... (kode di dalam fungsi ini sama persis seperti kode asli Anda)
     req_data = request.get_json()
