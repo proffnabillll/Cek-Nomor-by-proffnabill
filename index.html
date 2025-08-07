@@ -82,9 +82,59 @@
     <h3>Hasil:</h3>
     <pre id="result">Hasil pencarian akan ditampilkan di sini.</pre>
 
-    <script>
-        // URL backend Anda di Vercel. SUDAH SAYA SESUAIKAN UNTUK ANDA.
-        const API_SERVER_URL = "https://cek-nomor-by-proffnabill.vercel.app/search";
+   <script>
+    // URL backend Anda di Vercel
+    const API_SERVER_URL = "https://cek-nomor-by-proffnabill.vercel.app/search";
 
+    // Kita akan fokus pada tombol dan input, bukan lagi pada form
+    const numberInput = document.getElementById('phoneNumber');
+    const resultDiv = document.getElementById('result');
+    const loadingDiv = document.getElementById('loading');
+    const submitButton = document.getElementById('submitButton'); // Variabel ini sudah ada, sekarang kita pakai
+
+    // UBAH EVENT LISTENER DARI 'submit' KE 'click' PADA TOMBOL
+    submitButton.addEventListener('click', async () => {
+        // Karena bukan lagi form submit, kita tidak perlu 'event.preventDefault()'
+
+        const number = numberInput.value;
+        if (!number) {
+            alert('Silakan masukkan nomor telepon.');
+            return;
+        }
+
+        // Tampilkan status loading dan nonaktifkan tombol
+        loadingDiv.style.display = 'block';
+        submitButton.disabled = true;
+        resultDiv.textContent = 'Mencari...';
+
+        try {
+            const response = await fetch(API_SERVER_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ number: number }) // Kirim nomor dalam format JSON
+            });
+
+            if (!response.ok) {
+                // Tangani jika server merespon dengan error (spt 404, 500)
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+
+            // Tampilkan hasil dengan format JSON yang rapi
+            resultDiv.textContent = JSON.stringify(data, null, 2);
+
+        } catch (error) {
+            resultDiv.textContent = 'Terjadi kesalahan saat mengambil data: \n' + error.message;
+        } finally {
+            // Sembunyikan status loading dan aktifkan kembali tombol
+            loadingDiv.style.display = 'none';
+            submitButton.disabled = false;
+        }
+    });
+</script>
 
         const searchForm = document.getElementById
+
