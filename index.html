@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengecekan Nomor</title>
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            max-width: 600px; 
+            margin: 40px auto; 
+            padding: 20px; 
+            background-color: #f4f4f9; 
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 { 
+            color: #333; 
+            text-align: center; 
+        }
+        form { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="tel"] { 
+            padding: 12px; 
+            font-size: 16px; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+        }
+        button { 
+            padding: 12px; 
+            font-size: 16px; 
+            background-color: #007BFF; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            transition: background-color 0.2s;
+        }
+        button:hover { 
+            background-color: #0056b3; 
+        }
+        button:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
+        #result { 
+            margin-top: 20px; 
+            padding: 15px; 
+            background-color: #e9ecef; 
+            border: 1px solid #ccc;
+            border-radius: 5px; 
+            white-space: pre-wrap; 
+            word-wrap: break-word; 
+            font-family: "Courier New", Courier, monospace;
+        }
+        #loading { 
+            text-align: center; 
+            display: none; 
+            margin-top: 15px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🔍 Cek Informasi Nomor Telepon</h1>
+
+    <form id="searchForm">
+        <label for="phoneNumber">Masukkan Nomor Telepon (contoh: 81234567890):</label>
+        <input type="tel" id="phoneNumber" name="number" placeholder="Tanpa 0 atau +62 di depan" required>
+        <button type="submit" id="submitButton">Cari</button>
+    </form>
+
+    <div id="loading">Memuat...</div>
+    <h3>Hasil:</h3>
+    <pre id="result">Hasil pencarian akan ditampilkan di sini.</pre>
+
+    <script>
+        // URL backend Anda di Vercel. SUDAH SAYA SESUAIKAN UNTUK ANDA.
+        const API_SERVER_URL = "https://cek-nomor-by-proffnabill.vercel.app/search";
+
+        const searchForm = document.getElementById
