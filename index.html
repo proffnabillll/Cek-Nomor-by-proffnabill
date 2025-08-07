@@ -75,7 +75,7 @@
     <form id="searchForm">
         <label for="phoneNumber">Masukkan Nomor Telepon (contoh: 81234567890):</label>
         <input type="tel" id="phoneNumber" name="number" placeholder="Tanpa 0 atau +62 di depan" required>
-        <button type="submit" id="submitButton">Cari</button>
+        <button type="button" id="submitButton">Cari</button>
     </form>
 
     <div id="loading">Memuat...</div>
@@ -85,5 +85,6 @@
     <script>
         // URL backend Anda di Vercel. SUDAH SAYA SESUAIKAN UNTUK ANDA.
         const API_SERVER_URL = "https://cek-nomor-by-proffnabill.vercel.app/search";
+
 
         const searchForm = document.getElementById
